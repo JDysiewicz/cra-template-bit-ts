@@ -8,7 +8,7 @@
 # testing
 /coverage
 
-# environment variables
+# Env vars
 .env
 cypress.env.json
 

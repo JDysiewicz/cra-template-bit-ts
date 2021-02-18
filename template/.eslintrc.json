@@ -1,0 +1,57 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"plugin:react/recommended", // React standard eslint rules.
+		"plugin:@typescript-eslint/recommended", // Typescript specific eslint rules.
+		"plugin:jsx-a11y/recommended" // Accessibility eslint rules.
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"plugins": ["react", "@typescript-eslint", "jsx-a11y"],
+	"rules": {
+		"indent": "off", // Standard eslint-indent rule doesn't play well with @typescript-eslint.
+		"@typescript-eslint/indent": ["error", "tab", { "SwitchCase": 1 }], // Enforce tabs in switch cases too.
+		"@typescript-eslint/no-explicit-any": ["error"], // To use "any" type, must explicitly do so per file.
+		"quotes": ["error", "double"], // Double quote strings.
+		"semi": ["error", "always"], // Semi colons required.
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{ "vars": "all", "args": "all", "ignoreRestSiblings": false } // Will error instead of warning for unused vars.
+		],
+
+		"react/prefer-stateless-function": [
+			// Error on class component; must explicitly disable per file if needed.
+			2,
+			{ "ignorePureComponents": true }
+		],
+		"react/function-component-definition": [
+			// Arrow function components enforced over function declaration.
+			2,
+			{ "namedComponents": "arrow-function" }
+		],
+		"@typescript-eslint/naming-convention": [
+			// parameter and type/interface naming. Can't use for variables as React FC's have different naming.
+			"error",
+			{
+				"selector": "parameter",
+				"format": ["camelCase"],
+				"leadingUnderscore": "allow"
+			},
+			{
+				"selector": "typeLike",
+				"format": ["PascalCase"]
+			}
+		],
+		"react/prop-types": "off", // We use TS instead.
+		"react/require-default-props": "off" // We use TS instead.
+	}
+}
